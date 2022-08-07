@@ -1,6 +1,6 @@
 ﻿using Algorithm;
 
-Console.WriteLine("Welcome to Data Structures and Algorithm programs");
-String str = "ABC";
-int n = str.Length;
-Algo.permute(str, 0, n - 1);
+Console.WriteLine("Hello, to the algorithm and data structure problems");
+Console.WriteLine("Enter a word which you wantto permute");
+String s = Console.ReadLine();
+Algo.permutation("", s);

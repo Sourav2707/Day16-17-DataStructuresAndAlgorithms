@@ -8,31 +8,23 @@ namespace Algorithm
 {
     public class Algo
     {
-        public static void permute(String str,
-                                int l, int r)
+        public static void permutation(String fix, String s)
         {
-            if (l == r)
-                Console.WriteLine(str);
+            int l = s.Length;
+            if (l == 1)
+            {
+                Console.WriteLine(fix + s);
+            }
             else
             {
-                for (int i = l; i <= r; i++)
+                for (int i = 0; i < l; i++)
                 {
-                    str = swap(str, l, i);
-                    permute(str, l + 1, r);
-                    str = swap(str, l, i);
+                    char[] mychar = s.ToCharArray();
+                    char c = mychar[i];
+                    String st = s.Substring(0, i) + s.Substring(i + 1);
+                    permutation(fix + c, st);
                 }
             }
-        }
-        public static String swap(String a,
-                            int i, int j)
-        {
-            char temp;
-            char[] charArray = a.ToCharArray();
-            temp = charArray[i];
-            charArray[i] = charArray[j];
-            charArray[j] = temp;
-            string s = new string(charArray);
-            return s;
         }
     }
 }
