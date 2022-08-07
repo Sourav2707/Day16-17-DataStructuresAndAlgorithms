@@ -6,57 +6,64 @@ using System.Threading.Tasks;
 
 namespace Algorithm
 {
-    public class Algo
+    public class Algo<T> where T : IComparable
     {
-        public static bool prime(int num)
+        public void sortAndCall(T[] sentence, T find)
         {
-            int Count = 0;                              //counter for number of factors
-            for (int i = 2; i < num / 2; i++)
+            Array.Sort(sentence);
+            Algo<T>.search(sentence, find);
+        }
+        public static void search(T[] sen, T find)
+        {
+            int min = 0;
+            int max = sen.Length - 1;
+            int flag = 0;
+            while (min <= max)
             {
-                if (num % i == 0)
+                int mid = (min + max) / 2;
+                if (sen[mid].CompareTo(find) == 0)
                 {
-                    Count++;
+                    flag = 1;
+                    Console.WriteLine("Found at " + mid + " position ");
                     break;
                 }
-            }
-            if (Count == 0)
-            {
-                return true; //Console.WriteLine(num + " ");
-            }
-            return false;
-        }
-        public static bool palindrome(int num)
-        {
-            int temp = num;
-            int reverse = 0;
-            while (temp != 0)
-            {
-                reverse = reverse * 10 + temp % 10; ;
-                temp /= 10;
-            }
-            if (reverse == num)
-            {
-                return true;
-            }
-            return false;
-        }
-        public static void anagram(String fix, String s)
-        {
-            int l = s.Length;
-            if (l == 1)
-            {
-                Console.WriteLine(fix + s);
-            }
-            else
-            {
-                for (int i = 0; i < l; i++)
+                else if (sen[mid].CompareTo(find) > 0)
                 {
-                    char[] mychar = s.ToCharArray();
-                    char c = mychar[i];
-                    String st = s.Substring(0, i) + s.Substring(i + 1);
-                    anagram(fix + c, st);
+                    max = mid - 01;
+                }
+                else
+                {
+                    min = mid + 1;
                 }
             }
+            if (flag == 0)
+            {
+                Console.WriteLine("Not found");
+            }
+        }
+        public static void insertionSort(T[] sentence)
+        {
+            for (int x = 1; x < (sentence.Length) - 1; x++)
+            {
+                int i = x;
+                T t = sentence[x];
+                while (sentence[i - 1].CompareTo(t) > 0)
+                {
+                    sentence[i] = sentence[i - 1];
+                    i--;
+                    if (i == 0)
+                    {
+                        break;
+                    }
+                }
+                sentence[i] = t;
+            }
+            Console.WriteLine();
+            for (int x = 0; x < sentence.Length; x++)
+            {
+                Console.Write(sentence[x] + " ");
+            }
+
         }
     }
 }
